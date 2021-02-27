@@ -1,1 +1,1 @@
-console.log("Hi, this is a npx webpack test message");
+(()=>{"use strict";console.log("Hi, this is a npx webpack test message")})();
