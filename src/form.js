@@ -76,15 +76,15 @@ const form = (() => {
 	fpriority.id = "taskPriority";
 
 	var option1 = document.createElement("option");
-	option1.setAttribute("value", "Option 1");
+	option1.setAttribute("value", "Low");
 	option1.textContent = "Low";
 
 	var option2 = document.createElement("option");
-	option2.setAttribute("value", "Option 2");
+	option2.setAttribute("value", "Medium");
 	option2.textContent = "Medium";
 
 	var option3 = document.createElement("option");
-	option3.setAttribute("value", "Option 3");
+	option3.setAttribute("value", "High");
 	option3.textContent = "High";
 
 	fpriority.appendChild(option1);

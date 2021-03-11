@@ -47,17 +47,4 @@ export default class ToDo {
 	set priority(newPriority) {
 		this._priority = newPriority;
 	}
-
-	//create a new task when form is submitted
-	createTask() {
-		console.log("creating a todo...");
-
-		// let taskName = document.getElementById("taskName").value;
-		// let description = document.getElementById("taskDescription").value;
-		// let dueDate = document.getElementById("taskDueDate").value;
-		// let priority = document.getElementById("taskPriority").value;
-		// let newTask = new ToDo(taskName, description, dueDate, priority);
-		// console.log(newTask);
-		// console.log("task created successfully");
-	}
 }
