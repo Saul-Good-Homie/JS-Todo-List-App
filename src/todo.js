@@ -1,3 +1,5 @@
+import project from "./project";
+
 export default class ToDo {
 	constructor(name, description, dueDate, priority) {
 		this.name = name;
@@ -35,7 +37,7 @@ export default class ToDo {
 	}
 
 	set dueDate(newDueDate) {
-		this._description = newDueDate;
+		this._dueDate = newDueDate;
 	}
 
 	get priority() {
@@ -43,6 +45,19 @@ export default class ToDo {
 	}
 
 	set priority(newPriority) {
-		this._description = newPriority;
+		this._priority = newPriority;
+	}
+
+	//create a new task when form is submitted
+	createTask() {
+		console.log("creating a todo...");
+
+		// let taskName = document.getElementById("taskName").value;
+		// let description = document.getElementById("taskDescription").value;
+		// let dueDate = document.getElementById("taskDueDate").value;
+		// let priority = document.getElementById("taskPriority").value;
+		// let newTask = new ToDo(taskName, description, dueDate, priority);
+		// console.log(newTask);
+		// console.log("task created successfully");
 	}
 }
