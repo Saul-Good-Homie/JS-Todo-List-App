@@ -13,6 +13,7 @@ const feed = (() => {
 
 	//create column headers
 	const headerRow = document.createElement("tr");
+
 	const col1 = document.createElement("th");
 	col1.innerHTML = "Task Name";
 	col1.classList.add("two", "columns");
