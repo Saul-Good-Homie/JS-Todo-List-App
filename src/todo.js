@@ -1,3 +1,5 @@
+import * as edit from "./popup-edit-todo.js";
+
 //create new ToDo
 function createToDo(name, description, dueDate, priority) {
 	this.name = name;
@@ -28,6 +30,7 @@ let toDoForm = document.getElementById("newToDoForm");
 //bind actions to html UI
 const bindUI = () => {
 	console.log("binding UI elements...");
+
 	toDoForm.addEventListener("submit", createTask);
 };
 
@@ -59,7 +62,7 @@ const displayToDos = (array) => {
 
 		var name = document.createElement("td");
 		name.innerHTML = task.name;
-		name.classList.add("two", "columns");
+		name.classList.add("five", "columns");
 
 		var description = document.createElement("td");
 		description.innerHTML = task.description;
@@ -86,11 +89,40 @@ const displayToDos = (array) => {
 			deleteToDo(event);
 		};
 
+		var editButton = document.createElement("td");
+		editButton.classList.add(
+			"edit-button",
+			"one",
+			"columns",
+			"fas",
+			"fa-edit"
+		);
+		editButton.id = task.id;
+		editButton.onclick = function () {
+			editTask(event);
+			//openForm(event);
+		};
+
+		var doneButton = document.createElement("td");
+		doneButton.classList.add(
+			"done-button",
+			"one",
+			"columns",
+			"fas",
+			"fa-check-square"
+		);
+		doneButton.id = task.id;
+		doneButton.onclick = function () {
+			console.log("Task Completed");
+		};
+
 		newRow.appendChild(name);
-		newRow.appendChild(description);
+		//newRow.appendChild(description);
 		newRow.appendChild(dueDate);
 		newRow.appendChild(priority);
 		newRow.appendChild(deleteButton);
+		newRow.appendChild(editButton);
+		newRow.appendChild(doneButton);
 		//append new row to table
 		table.appendChild(newRow);
 	});
@@ -122,6 +154,20 @@ function createTask(e) {
 	displayToDos(defaultProject);
 }
 
+function editTask(e) {
+	e.preventDefault();
+	//get id of target
+	let id = e.target.id;
+
+	//find correct task by ID
+	let task = defaultProject.filter((n) => n.id == id);
+	let editedTask = task[0];
+
+	console.table(defaultProject);
+	//pass task into openform function
+	openForm(editedTask);
+}
+
 // delete todo
 function deleteToDo(e) {
 	let id = e.target.id;
@@ -132,8 +178,55 @@ function deleteToDo(e) {
 	console.log("task sucessfully deleted");
 }
 
+// Javascript to open and close form pop up
+function openForm(editedTask) {
+	//generate form with task specific values
+	edit.popupForm(editedTask);
+
+	//add event listeners
+	let cancel = document.getElementById("cancel-button");
+	cancel.onclick = function () {
+		closeForm();
+	};
+
+	//on submit, update task attributes, refresh feed and close form
+	let popupForm = document.getElementById("editToDoForm");
+	popupForm.addEventListener("submit", function (e) {
+		e.preventDefault();
+
+		let taskName = document.getElementById("editTaskName").value;
+		let description = document.getElementById("editTaskDescription").value;
+		let dueDate = document.getElementById("editTaskDueDate").value;
+		let priority = document.getElementById("editTaskPriority").value;
+
+		editedTask.name = taskName;
+		editedTask.description = description;
+		editedTask.dueDate = dueDate;
+		editedTask.priority = priority;
+		console.table(defaultProject);
+		displayToDos(defaultProject);
+		closeForm();
+	});
+}
+
+function closeForm() {
+	document.getElementById("editToDoForm").style.display = "none";
+}
+
 function init() {
 	bindUI();
+}
+
+function dummyData() {
+	let newTask = new createToDo(
+		"Dummy Task",
+		"description",
+		"03/24/2021",
+		"Med"
+	);
+	//add to project
+	addToProject(defaultProject, newTask);
+	displayToDos(defaultProject);
 }
 
 export {
@@ -142,6 +235,7 @@ export {
 	displayToDos,
 	removeFromProject,
 	init,
+	dummyData,
 	defaultProject,
 	taskCounter,
 };

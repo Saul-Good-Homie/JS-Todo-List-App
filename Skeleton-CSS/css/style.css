@@ -1,0 +1,34 @@
+/* .fas,
+.fa-trash-alt {
+	color: red;
+} */
+
+.delete-button:hover {
+	cursor: pointer;
+	color: rgb(228, 76, 76);
+}
+
+.done-button:hover {
+	cursor: pointer;
+	color: rgb(19, 221, 19);
+}
+
+.edit-button:hover {
+	cursor: pointer;
+	color: rgb(129, 129, 129);
+}
+
+/* popup edit form */
+
+#editToDoForm {
+	border: 1px solid black;
+	border-radius: 10px;
+	background-color: #e6e7e7;
+	padding: 1%;
+	display: block;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 75%;
+}
