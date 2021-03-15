@@ -189,11 +189,6 @@ function openForm(editedTask) {
 		closeForm();
 	};
 
-	//on submit, update task attributes, refresh feed and close form
-	// let popupForm = document.getElementById("editToDoForm");
-	// popupForm.addEventListener("submit", function (e) {
-	// 	e.preventDefault();
-
 	let submit = document.getElementById("submit-button");
 	submit.onclick = function () {
 		let taskName = document.getElementById("editTaskName").value;
@@ -205,7 +200,6 @@ function openForm(editedTask) {
 		editedTask.description = description;
 		editedTask.dueDate = dueDate;
 		editedTask.priority = priority;
-		console.table(defaultProject);
 		displayToDos(defaultProject);
 		closeForm();
 	};
@@ -226,7 +220,7 @@ function dummyData() {
 		"Dummy Task",
 		"description",
 		"03/24/2021",
-		"Med"
+		"Medium"
 	);
 	//add to project
 	addToProject(defaultProject, newTask);

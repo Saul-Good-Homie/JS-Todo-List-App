@@ -86,9 +86,19 @@ const popupForm = (task) => {
 	option3.setAttribute("value", "High");
 	option3.textContent = "High";
 
-	fpriority.appendChild(option1);
-	fpriority.appendChild(option2);
-	fpriority.appendChild(option3);
+	if (task.priority == "Low") {
+		fpriority.appendChild(option1);
+		fpriority.appendChild(option2);
+		fpriority.appendChild(option3);
+	} else if (task.priority == "Medium") {
+		fpriority.appendChild(option2);
+		fpriority.appendChild(option1);
+		fpriority.appendChild(option3);
+	} else {
+		fpriority.appendChild(option3);
+		fpriority.appendChild(option1);
+		fpriority.appendChild(option2);
+	}
 
 	div5.appendChild(fpriorityLabel);
 	div5.appendChild(fpriority);
