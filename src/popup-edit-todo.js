@@ -97,8 +97,9 @@ const popupForm = (task) => {
 	//create submit button
 	var submit = document.createElement("input");
 	submit.classList.add("button-primary");
-	submit.setAttribute("type", "submit");
+	submit.setAttribute("type", "button");
 	submit.setAttribute("value", "Submit");
+	submit.id = "submit-button";
 	div1.appendChild(submit);
 
 	//create cancel button

@@ -190,10 +190,12 @@ function openForm(editedTask) {
 	};
 
 	//on submit, update task attributes, refresh feed and close form
-	let popupForm = document.getElementById("editToDoForm");
-	popupForm.addEventListener("submit", function (e) {
-		e.preventDefault();
+	// let popupForm = document.getElementById("editToDoForm");
+	// popupForm.addEventListener("submit", function (e) {
+	// 	e.preventDefault();
 
+	let submit = document.getElementById("submit-button");
+	submit.onclick = function () {
 		let taskName = document.getElementById("editTaskName").value;
 		let description = document.getElementById("editTaskDescription").value;
 		let dueDate = document.getElementById("editTaskDueDate").value;
@@ -206,11 +208,13 @@ function openForm(editedTask) {
 		console.table(defaultProject);
 		displayToDos(defaultProject);
 		closeForm();
-	});
+	};
 }
 
 function closeForm() {
-	document.getElementById("editToDoForm").style.display = "none";
+	var form = document.getElementById("editToDoForm");
+	form.style.display = "none";
+	form.remove();
 }
 
 function init() {
