@@ -33,21 +33,25 @@
 	width: 75%;
 }
 
-/* #editToDoForm {
+/* Projects sections */
+
+.projects {
+	border: 1px solid red;
+	margin: 1%;
+}
+
+#newProjectForm {
 	border: 1px solid black;
 	border-radius: 10px;
 	background-color: #e6e7e7;
 	padding: 1%;
-	display: block;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
 	position: fixed;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
 	width: 75%;
-} */
-
-/* Projects sections */
-
-.projects {
-	border: 1px solid red;
 }

@@ -1,3 +1,5 @@
+import * as projectStack from "./projects-stack";
+
 let allProjects = [];
 
 function createProject(name) {
@@ -25,23 +27,20 @@ const popupForm = () => {
 
 	const div1 = document.createElement("div");
 	div1.className = "row";
-	const div2 = document.createElement("div");
-	div2.classList.add("three", "columns");
 
 	// Create an input element for todo name
 	var fnameLabel = document.createElement("label");
-	fnameLabel.textContent = "Task Name";
+	fnameLabel.textContent = "Project Name";
 	var fname = document.createElement("input");
 	fname.classList.add("u-full-width");
 	fname.setAttribute("type", "text");
-	fname.setAttribute("name", "taskName");
-	fname.setAttribute("value", task.name);
-	fname.id = "editTaskName";
+	fname.setAttribute("name", "projectName");
+	fname.setAttribute("placeholder", "Enter New Project Name");
+	fname.id = "projectName";
 	fname.setAttribute("required", true);
 
-	div2.appendChild(fnameLabel);
-	div2.appendChild(fname);
-	div1.appendChild(div2);
+	div1.appendChild(fnameLabel);
+	div1.appendChild(fname);
 
 	//create submit button
 	var submit = document.createElement("input");
@@ -50,6 +49,7 @@ const popupForm = () => {
 	submit.setAttribute("value", "Submit");
 	submit.id = "submit-button";
 	div1.appendChild(submit);
+	submit.onclick = submitNewProject;
 
 	//create cancel button
 	var cancel = document.createElement("input");
@@ -58,13 +58,37 @@ const popupForm = () => {
 	cancel.setAttribute("value", "Cancel");
 	cancel.classList.add("button-secondary");
 	div1.appendChild(cancel);
+	cancel.onclick = closeForm;
 
 	//append the form to content
 	form.appendChild(div1);
 	content.appendChild(form);
 };
 
-const openForm = () => {};
+const submitNewProject = () => {
+	let projectName = document.getElementById("projectName").value;
+
+	if (projectName == "") {
+		alert("Please enter a project name");
+		return false;
+	} else {
+		let newProject = new createProject(projectName);
+		allProjects.push(newProject);
+		projectStack.displayProjects();
+		closeForm();
+	}
+};
+
+const openForm = () => {
+	console.log("creating new project");
+	popupForm();
+};
+
+const closeForm = () => {
+	var form = document.getElementById("newProjectForm");
+	form.style.display = "none";
+	form.remove();
+};
 
 const init = () => {
 	let all = new createProject("All");
@@ -73,4 +97,4 @@ const init = () => {
 	allProjects.push(completed);
 };
 
-export { init, allProjects };
+export { init, openForm, allProjects };

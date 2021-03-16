@@ -14,6 +14,7 @@ const projectStack = (() => {
 	const newProject = document.createElement("button");
 	newProject.classList.add("button", "button-primary", "new-project");
 	newProject.appendChild(document.createTextNode("Create New Project!"));
+	newProject.onclick = Project.openForm;
 
 	//append to DOM
 	projects.appendChild(newProject);
@@ -25,6 +26,15 @@ const projectStack = (() => {
 const displayProjects = () => {
 	let projects = Project.allProjects;
 	let projectContainer = document.getElementById("project-container");
+	projectContainer.innerHTML = "";
+	//create button to add new
+	const newProject = document.createElement("button");
+	newProject.classList.add("button", "button-primary", "new-project");
+	newProject.appendChild(document.createTextNode("Create New Project!"));
+	newProject.onclick = Project.openForm;
+
+	//append to DOM
+	projectContainer.appendChild(newProject);
 
 	projects.forEach((n) => {
 		const newProject = document.createElement("button");
