@@ -39,7 +39,11 @@ const displayProjects = () => {
 	projects.forEach((n) => {
 		const newProject = document.createElement("button");
 		newProject.classList.add("button", "button-secondary", "projects");
-		newProject.appendChild(document.createTextNode(n.name));
+
+		var taskList = n.tasks;
+		newProject.appendChild(
+			document.createTextNode(n.name + " " + taskList.length)
+		);
 		newProject.onclick = function () {
 			Project.displayToDos(n);
 		};

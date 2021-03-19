@@ -11,6 +11,7 @@ function createProject(name) {
 function addToProject(project, task) {
 	let taskList = project.tasks;
 	taskList.push(task);
+	projectStack.displayProjects();
 }
 
 function removeFromProject(project, task) {
@@ -20,6 +21,7 @@ function removeFromProject(project, task) {
 	//reset project tasks to new array
 	project.tasks = arr;
 	//refresh feed
+	projectStack.displayProjects();
 	displayToDos(project);
 }
 
@@ -27,7 +29,7 @@ function displayToDos(project) {
 	let taskList = project.tasks;
 
 	//declare known HTML elements
-	const table = document.getElementById("feed");
+	const table = document.getElementById("table-body");
 	ToDo.clearFeed();
 
 	//loop through array and make new rows
@@ -110,15 +112,6 @@ function displayToDos(project) {
 	});
 }
 
-// //create a new project
-// createProject(e) {
-// 	console.log("creating a project...");
-// 	e.preventDefault();
-// 	let projectName = document.getElementById("projectName").value;
-// 	let newProject = new Project(projectName);
-// 	console.log(newProject);
-// }
-
 const popupForm = () => {
 	//declare known HTML elements
 	const content = document.getElementById("content");
@@ -174,6 +167,12 @@ const submitNewProject = () => {
 	if (projectName == "") {
 		alert("Please enter a project name");
 		return false;
+	} else if (
+		allProjects.some(
+			(p) => p.name.toUpperCase() == projectName.toUpperCase()
+		)
+	) {
+		alert("That Project name is taken. Please choose a new name.");
 	} else {
 		let newProject = new createProject(projectName);
 		allProjects.push(newProject);

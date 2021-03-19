@@ -7,12 +7,15 @@ const feed = (() => {
 	table.classList.add("u-full-width");
 	table.id = "feed";
 
-	//create table header
-	const tableHeader = document.createElement("thead");
-	table.appendChild(tableHeader);
+	// //create table header
+	// const tableHeader = document.createElement("thead");
+	// tableHeader.id = "table-head";
+
+	// table.appendChild(tableHeader);
 
 	//create column headers
 	const headerRow = document.createElement("tr");
+	headerRow.id = "header-row";
 
 	const col1 = document.createElement("th");
 	col1.innerHTML = "Task Name";
@@ -50,11 +53,13 @@ const feed = (() => {
 	headerRow.appendChild(col6);
 	headerRow.appendChild(col7);
 
-	tableHeader.appendChild(headerRow);
+	//tableHeader.appendChild(headerRow);
+	table.appendChild(headerRow);
 
 	//create table body
 
 	const body = document.createElement("tbody");
+	body.id = "table-body";
 	table.appendChild(body);
 
 	content.appendChild(table);
