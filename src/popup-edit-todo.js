@@ -1,4 +1,6 @@
-const popupForm = (task) => {
+import * as Project from "./project";
+
+const popupForm = (project, task) => {
 	//declare known HTML elements
 	const content = document.getElementById("content");
 
@@ -103,6 +105,43 @@ const popupForm = (task) => {
 	div5.appendChild(fpriorityLabel);
 	div5.appendChild(fpriority);
 	div1.appendChild(div5);
+
+	// If projects exist, create an input element for project
+	if (Project.allProjects.length > 2) {
+		const div6 = document.createElement("div");
+
+		//resize elements
+		div6.classList.add("two", "columns");
+		div2.classList.remove("three");
+		div2.classList.add("two");
+		div3.classList.remove("five");
+		div3.classList.add("four");
+
+		var fprojectLabel = document.createElement("label");
+		fprojectLabel.textContent = "Add to Project";
+		var fproject = document.createElement("select");
+		fproject.classList.add("u-full-width");
+		fproject.setAttribute("name", "taskProject");
+		//fproject.setAttribute("value", task.priority);
+		fproject.id = "editTaskProject";
+
+		var defaultOption = document.createElement("option");
+		defaultOption.setAttribute("value", "no-project-chosen");
+		defaultOption.textContent = "Choose a Project";
+		fproject.appendChild(defaultOption);
+
+		//skip the first two projects and then loop through each one as a select option
+		Project.allProjects.slice(2).forEach((p) => {
+			var option = document.createElement("option");
+			option.setAttribute("value", p.name);
+			option.textContent = p.name;
+			fproject.appendChild(option);
+		});
+
+		div6.appendChild(fprojectLabel);
+		div6.appendChild(fproject);
+		div1.appendChild(div6);
+	}
 
 	//create submit button
 	var submit = document.createElement("input");

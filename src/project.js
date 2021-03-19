@@ -73,7 +73,7 @@ function displayToDos(project) {
 		);
 		editButton.id = task.id;
 		editButton.onclick = function () {
-			ToDo.editTask(event);
+			ToDo.editTask(project, task);
 			//openForm(event);
 		};
 

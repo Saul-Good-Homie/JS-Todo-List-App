@@ -156,18 +156,41 @@ function createTask(e) {
 	Project.displayToDos(Project.allProjects[0]);
 }
 
-function editTask(e) {
-	e.preventDefault();
-	//get id of target
-	let id = e.target.id;
+function editTask(project, task) {
+	edit.popupForm(project, task);
 
-	//find correct task by ID
-	let task = defaultProject.filter((n) => n.id == id);
-	let editedTask = task[0];
+	//add event listeners
+	let cancel = document.getElementById("cancel-button");
+	cancel.onclick = function () {
+		closeForm();
+	};
 
-	console.table(defaultProject);
-	//pass task into openform function
-	openForm(editedTask);
+	let submit = document.getElementById("submit-button");
+	submit.onclick = function () {
+		let taskName = document.getElementById("editTaskName").value;
+		let description = document.getElementById("editTaskDescription").value;
+		let dueDate = document.getElementById("editTaskDueDate").value;
+		let priority = document.getElementById("editTaskPriority").value;
+
+		let projectName = document.getElementById("editTaskProject").value;
+
+		if (projectName === "no-project-chosen") {
+			console.log("No project chosen");
+		} else {
+			const newProject = Project.allProjects.find(
+				(project) => project.name == projectName
+			);
+			Project.removeFromProject(project, task);
+			Project.addToProject(newProject, task);
+		}
+		task.name = taskName;
+		task.description = description;
+		task.dueDate = dueDate;
+		task.priority = priority;
+		//Project.addToProject(newProject, task);
+		Project.displayToDos(project);
+		closeForm();
+	};
 }
 
 // delete todo
@@ -198,33 +221,6 @@ const markUncomplete = (project, task) => {
 	Project.removeFromProject(project, task);
 	Project.displayToDos(project);
 };
-
-// Javascript to open and close form pop up
-function openForm(editedTask) {
-	//generate form with task specific values
-	edit.popupForm(editedTask);
-
-	//add event listeners
-	let cancel = document.getElementById("cancel-button");
-	cancel.onclick = function () {
-		closeForm();
-	};
-
-	let submit = document.getElementById("submit-button");
-	submit.onclick = function () {
-		let taskName = document.getElementById("editTaskName").value;
-		let description = document.getElementById("editTaskDescription").value;
-		let dueDate = document.getElementById("editTaskDueDate").value;
-		let priority = document.getElementById("editTaskPriority").value;
-
-		editedTask.name = taskName;
-		editedTask.description = description;
-		editedTask.dueDate = dueDate;
-		editedTask.priority = priority;
-		Project.displayToDos(Project.allProjects[0]);
-		closeForm();
-	};
-}
 
 function closeForm() {
 	var form = document.getElementById("editToDoForm");
