@@ -40,6 +40,10 @@ const displayProjects = () => {
 		const newProject = document.createElement("button");
 		newProject.classList.add("button", "button-secondary", "projects");
 		newProject.appendChild(document.createTextNode(n.name));
+		newProject.onclick = function () {
+			Project.displayToDos(n);
+		};
+
 		projectContainer.appendChild(newProject);
 	});
 };

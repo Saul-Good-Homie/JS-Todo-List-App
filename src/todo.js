@@ -1,4 +1,5 @@
 import * as edit from "./popup-edit-todo.js";
+import * as Project from "./project";
 
 //create new ToDo
 function createToDo(name, description, dueDate, priority) {
@@ -34,7 +35,7 @@ const bindUI = () => {
 	toDoForm.addEventListener("submit", createTask);
 };
 
-// add to project
+//add to project
 function addToProject(project, newTask) {
 	project.push(newTask);
 }
@@ -50,83 +51,83 @@ function clearFeed() {
 	table.innerHTML = "";
 }
 
-// display all todos in a project
-const displayToDos = (array) => {
-	//declare known HTML elements
-	const table = document.getElementById("feed");
-	clearFeed();
+// // display all todos in a project
+// const displayToDos = (array) => {
+// 	//declare known HTML elements
+// 	const table = document.getElementById("feed");
+// 	clearFeed();
 
-	//loop through array and make new rows
-	array.forEach((task) => {
-		var newRow = document.createElement("tr");
+// 	//loop through array and make new rows
+// 	array.forEach((task) => {
+// 		var newRow = document.createElement("tr");
 
-		var name = document.createElement("td");
-		name.innerHTML = task.name;
-		name.classList.add("five", "columns");
+// 		var name = document.createElement("td");
+// 		name.innerHTML = task.name;
+// 		name.classList.add("five", "columns");
 
-		var description = document.createElement("td");
-		description.innerHTML = task.description;
-		description.classList.add("four", "columns");
+// 		var description = document.createElement("td");
+// 		description.innerHTML = task.description;
+// 		description.classList.add("four", "columns");
 
-		var dueDate = document.createElement("td");
-		dueDate.innerHTML = task.dueDate;
-		dueDate.classList.add("two", "columns");
+// 		var dueDate = document.createElement("td");
+// 		dueDate.innerHTML = task.dueDate;
+// 		dueDate.classList.add("two", "columns");
 
-		var priority = document.createElement("td");
-		priority.innerHTML = task.priority;
-		priority.classList.add("two", "columns");
+// 		var priority = document.createElement("td");
+// 		priority.innerHTML = task.priority;
+// 		priority.classList.add("two", "columns");
 
-		var deleteButton = document.createElement("td");
-		deleteButton.classList.add(
-			"delete-button",
-			"one",
-			"columns",
-			"fas",
-			"fa-trash-alt"
-		);
-		deleteButton.id = task.id;
-		deleteButton.onclick = function () {
-			deleteToDo(event);
-		};
+// 		var deleteButton = document.createElement("td");
+// 		deleteButton.classList.add(
+// 			"delete-button",
+// 			"one",
+// 			"columns",
+// 			"fas",
+// 			"fa-trash-alt"
+// 		);
+// 		deleteButton.id = task.id;
+// 		deleteButton.onclick = function () {
+// 			deleteToDo(event);
+// 		};
 
-		var editButton = document.createElement("td");
-		editButton.classList.add(
-			"edit-button",
-			"one",
-			"columns",
-			"fas",
-			"fa-edit"
-		);
-		editButton.id = task.id;
-		editButton.onclick = function () {
-			editTask(event);
-			//openForm(event);
-		};
+// 		var editButton = document.createElement("td");
+// 		editButton.classList.add(
+// 			"edit-button",
+// 			"one",
+// 			"columns",
+// 			"fas",
+// 			"fa-edit"
+// 		);
+// 		editButton.id = task.id;
+// 		editButton.onclick = function () {
+// 			editTask(event);
+// 			//openForm(event);
+// 		};
 
-		var doneButton = document.createElement("td");
-		doneButton.classList.add(
-			"done-button",
-			"one",
-			"columns",
-			"fas",
-			"fa-check-square"
-		);
-		doneButton.id = task.id;
-		doneButton.onclick = function () {
-			console.log("Task Completed");
-		};
+// 		var doneButton = document.createElement("td");
+// 		doneButton.classList.add(
+// 			"done-button",
+// 			"one",
+// 			"columns",
+// 			"fas",
+// 			"fa-check-square"
+// 		);
+// 		doneButton.id = task.id;
+// 		doneButton.onclick = function () {
+// 			console.log("Task Completed");
+// 		};
 
-		newRow.appendChild(name);
-		//newRow.appendChild(description);
-		newRow.appendChild(dueDate);
-		newRow.appendChild(priority);
-		newRow.appendChild(deleteButton);
-		newRow.appendChild(editButton);
-		newRow.appendChild(doneButton);
-		//append new row to table
-		table.appendChild(newRow);
-	});
-};
+// 		newRow.appendChild(name);
+// 		//newRow.appendChild(description);
+// 		newRow.appendChild(dueDate);
+// 		newRow.appendChild(priority);
+// 		newRow.appendChild(deleteButton);
+// 		newRow.appendChild(editButton);
+// 		newRow.appendChild(doneButton);
+// 		//append new row to table
+// 		table.appendChild(newRow);
+// 	});
+// };
 
 function clearForm() {
 	document.getElementById("taskName").value = "";
@@ -148,10 +149,11 @@ function createTask(e) {
 	let newTask = new createToDo(taskName, description, dueDate, priority);
 	console.log("task created successfully");
 	clearForm();
-	//add tp project
-	addToProject(defaultProject, newTask);
+	//add t project
 
-	displayToDos(defaultProject);
+	Project.addToProject(Project.allProjects[0], newTask);
+	console.log(Project.allProjects[0]);
+	Project.displayToDos(Project.allProjects[0]);
 }
 
 function editTask(e) {
@@ -171,12 +173,38 @@ function editTask(e) {
 // delete todo
 function deleteToDo(e) {
 	let id = e.target.id;
-	let task = defaultProject.filter((n) => n.id == id);
+	let project = Project.allProjects[0];
+	let task = project.filter((n) => n.id == id);
 	let deletedTask = task[0];
 	removeFromProject(deletedTask);
-	displayToDos(defaultProject);
+	displayToDos(Project.allProjects[0]);
 	console.log("task sucessfully deleted");
 }
+
+const markComplete = (e) => {
+	let id = e.target.id;
+	let project = Project.allProjects[0];
+	let taskList = project.tasks;
+
+	if (taskList.some((task) => task.id === 0)) {
+		let task = taskList.some((task) => task.id === 0);
+		console.log(task);
+	} else {
+		console.log("Object not found.");
+	}
+	//console.log(taskList.some((e) => e.id === id);
+	// if (taskList.some((e) => e.id === id)) {
+	// 	console.log("true");
+	// 	/* vendors contains the element we're looking for */
+	// } else {
+	// 	console.log("false");
+	// }
+
+	// let task = project.filter((n) => n.id == id);
+	// let deletedTask = task[0];
+	console.log(taskList);
+	console.log(id);
+};
 
 // Javascript to open and close form pop up
 function openForm(editedTask) {
@@ -200,7 +228,7 @@ function openForm(editedTask) {
 		editedTask.description = description;
 		editedTask.dueDate = dueDate;
 		editedTask.priority = priority;
-		displayToDos(defaultProject);
+		Project.displayToDos(Project.allProjects[0]);
 		closeForm();
 	};
 }
@@ -222,18 +250,30 @@ function dummyData() {
 		"03/24/2021",
 		"Medium"
 	);
+	let newTask2 = new createToDo(
+		"Dummy Task two",
+		"description two",
+		"03/24/2021",
+		"High"
+	);
 	//add to project
-	addToProject(defaultProject, newTask);
-	displayToDos(defaultProject);
+
+	Project.addToProject(Project.allProjects[0], newTask);
+	Project.addToProject(Project.allProjects[0], newTask2);
+	Project.displayToDos(Project.allProjects[0]);
+	console.log(Project.allProjects[0]);
 }
 
 export {
 	createToDo,
+	clearFeed,
 	addToProject,
-	displayToDos,
 	removeFromProject,
 	init,
 	dummyData,
+	editTask,
+	deleteToDo,
+	markComplete,
 	defaultProject,
 	taskCounter,
 };

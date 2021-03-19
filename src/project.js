@@ -1,10 +1,119 @@
 import * as projectStack from "./projects-stack";
+import * as ToDo from "./todo";
 
 let allProjects = [];
 
 function createProject(name) {
 	this.name = name;
 	this.tasks = [];
+}
+
+function addToProject(project, task) {
+	let taskList = project.tasks;
+	taskList.push(task);
+}
+
+// function removeFromProject(event) {
+// 	console.log("task sucessfully deleted");
+
+// 	let id = event.target.id;
+// 	let project = allProjects[0];
+// 	let taskList = project.tasks;
+// 	let task = taskList.filter((n) => n.id == id);
+// 	let deletedTask = task[0];
+
+// 	let arr = taskList.filter((n) => n !== deletedTask);
+// 	taskList = arr;
+// 	displayToDos(allProjects[0]);
+// }
+
+function removeFromProject(project, task) {
+	let taskList = project.tasks;
+	//find all tasks that do not match the one selected
+	let arr = taskList.filter((n) => n !== task);
+	//reset project tasks to new array
+	project.tasks = arr;
+	//refresh feed
+	displayToDos(project);
+}
+
+function displayToDos(project) {
+	let taskList = project.tasks;
+
+	//declare known HTML elements
+	const table = document.getElementById("feed");
+	ToDo.clearFeed();
+
+	//loop through array and make new rows
+	taskList.forEach((task) => {
+		var newRow = document.createElement("tr");
+
+		var name = document.createElement("td");
+		name.innerHTML = task.name;
+		name.classList.add("five", "columns");
+
+		var description = document.createElement("td");
+		description.innerHTML = task.description;
+		description.classList.add("four", "columns");
+
+		var dueDate = document.createElement("td");
+		dueDate.innerHTML = task.dueDate;
+		dueDate.classList.add("two", "columns");
+
+		var priority = document.createElement("td");
+		priority.innerHTML = task.priority;
+		priority.classList.add("two", "columns");
+
+		var deleteButton = document.createElement("td");
+		deleteButton.classList.add(
+			"delete-button",
+			"one",
+			"columns",
+			"fas",
+			"fa-trash-alt"
+		);
+		deleteButton.id = task.id;
+		deleteButton.onclick = function () {
+			removeFromProject(project, task);
+		};
+
+		var editButton = document.createElement("td");
+		editButton.classList.add(
+			"edit-button",
+			"one",
+			"columns",
+			"fas",
+			"fa-edit"
+		);
+		editButton.id = task.id;
+		editButton.onclick = function () {
+			ToDo.editTask(event);
+			//openForm(event);
+		};
+
+		var doneButton = document.createElement("td");
+		doneButton.classList.add(
+			"done-button",
+			"one",
+			"columns",
+			"fas",
+			"fa-check-square"
+		);
+		doneButton.id = task.id;
+		doneButton.onclick = function () {
+			ToDo.markComplete(event);
+		};
+
+		newRow.appendChild(name);
+		//newRow.appendChild(description);
+		newRow.appendChild(dueDate);
+		newRow.appendChild(priority);
+		newRow.appendChild(deleteButton);
+		newRow.appendChild(editButton);
+		newRow.appendChild(doneButton);
+		//append new row to table
+		table.appendChild(newRow);
+	});
 }
 
 // //create a new project
@@ -80,7 +189,6 @@ const submitNewProject = () => {
 };
 
 const openForm = () => {
-	console.log("creating new project");
 	popupForm();
 };
 
@@ -97,4 +205,4 @@ const init = () => {
 	allProjects.push(completed);
 };
 
-export { init, openForm, allProjects };
+export { init, openForm, addToProject, displayToDos, allProjects };
