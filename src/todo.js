@@ -181,29 +181,22 @@ function deleteToDo(e) {
 	console.log("task sucessfully deleted");
 }
 
-const markComplete = (e) => {
-	let id = e.target.id;
-	let project = Project.allProjects[0];
-	let taskList = project.tasks;
+const markComplete = (project, task) => {
+	//marking complete moves task from all project to completed project
+	//and refreshing feed
+	task.done = true;
+	Project.addToProject(Project.allProjects[1], task);
+	Project.removeFromProject(project, task);
+	Project.displayToDos(project);
+};
 
-	if (taskList.some((task) => task.id === 0)) {
-		let task = taskList.some((task) => task.id === 0);
-		console.log(task);
-	} else {
-		console.log("Object not found.");
-	}
-	//console.log(taskList.some((e) => e.id === id);
-	// if (taskList.some((e) => e.id === id)) {
-	// 	console.log("true");
-	// 	/* vendors contains the element we're looking for */
-	// } else {
-	// 	console.log("false");
-	// }
-
-	// let task = project.filter((n) => n.id == id);
-	// let deletedTask = task[0];
-	console.log(taskList);
-	console.log(id);
+const markUncomplete = (project, task) => {
+	//reverse of marking complete. adds to generic all project regardless of original
+	//project
+	task.done = false;
+	Project.addToProject(Project.allProjects[0], task);
+	Project.removeFromProject(project, task);
+	Project.displayToDos(project);
 };
 
 // Javascript to open and close form pop up
@@ -274,6 +267,7 @@ export {
 	editTask,
 	deleteToDo,
 	markComplete,
+	markUncomplete,
 	defaultProject,
 	taskCounter,
 };

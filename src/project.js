@@ -13,20 +13,6 @@ function addToProject(project, task) {
 	taskList.push(task);
 }
 
-// function removeFromProject(event) {
-// 	console.log("task sucessfully deleted");
-
-// 	let id = event.target.id;
-// 	let project = allProjects[0];
-// 	let taskList = project.tasks;
-// 	let task = taskList.filter((n) => n.id == id);
-// 	let deletedTask = task[0];
-
-// 	let arr = taskList.filter((n) => n !== deletedTask);
-// 	taskList = arr;
-// 	displayToDos(allProjects[0]);
-// }
-
 function removeFromProject(project, task) {
 	let taskList = project.tasks;
 	//find all tasks that do not match the one selected
@@ -99,10 +85,18 @@ function displayToDos(project) {
 			"fas",
 			"fa-check-square"
 		);
+		if (task.done == false) {
+			doneButton.onclick = function () {
+				ToDo.markComplete(project, task);
+			};
+		} else {
+			doneButton.classList.add("task-done");
+			doneButton.onclick = function () {
+				ToDo.markUncomplete(project, task);
+			};
+		}
+
 		doneButton.id = task.id;
-		doneButton.onclick = function () {
-			ToDo.markComplete(event);
-		};
 
 		newRow.appendChild(name);
 		//newRow.appendChild(description);
@@ -205,4 +199,11 @@ const init = () => {
 	allProjects.push(completed);
 };
 
-export { init, openForm, addToProject, displayToDos, allProjects };
+export {
+	init,
+	openForm,
+	addToProject,
+	displayToDos,
+	removeFromProject,
+	allProjects,
+};
