@@ -38,7 +38,7 @@ function displayToDos(project) {
 
 		var name = document.createElement("td");
 		name.innerHTML = task.name;
-		name.classList.add("five", "columns");
+		name.classList.add("three", "columns");
 
 		var description = document.createElement("td");
 		description.innerHTML = task.description;
@@ -46,11 +46,11 @@ function displayToDos(project) {
 
 		var dueDate = document.createElement("td");
 		dueDate.innerHTML = task.dueDate;
-		dueDate.classList.add("two", "columns");
+		dueDate.classList.add("three", "columns");
 
 		var priority = document.createElement("td");
 		priority.innerHTML = task.priority;
-		priority.classList.add("two", "columns");
+		priority.classList.add("three", "columns");
 
 		var deleteButton = document.createElement("td");
 		deleteButton.classList.add(

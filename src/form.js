@@ -1,8 +1,11 @@
 const form = (() => {
 	//declare known HTML elements
-	const content = document.getElementById("content");
+	const rightContainer = document.getElementById("right-container");
 
 	//create form and append to content
+	const formContainer = document.createElement("div");
+	formContainer.classList.add("row");
+	formContainer.id = "form-container";
 
 	const form = document.createElement("form");
 	form.id = "newToDoForm";
@@ -19,7 +22,7 @@ const form = (() => {
 	fname.classList.add("u-full-width");
 	fname.setAttribute("type", "text");
 	fname.setAttribute("name", "taskName");
-	fname.setAttribute("placeholder", "Project Charter");
+	fname.setAttribute("placeholder", "Enter Task Name");
 	fname.id = "taskName";
 	fname.setAttribute("required", true);
 
@@ -38,10 +41,7 @@ const form = (() => {
 	fdesc.classList.add("u-full-width");
 	fdesc.setAttribute("type", "text");
 	fdesc.setAttribute("name", "taskDescription");
-	fdesc.setAttribute(
-		"placeholder",
-		"Create Project Charter and Send to Sponsor"
-	);
+	fdesc.setAttribute("placeholder", "Enter Task Description");
 	fdesc.id = "taskDescription";
 
 	div3.appendChild(fdescLabel);
@@ -99,12 +99,13 @@ const form = (() => {
 	var submit = document.createElement("input");
 	submit.classList.add("button-primary");
 	submit.setAttribute("type", "submit");
-	submit.setAttribute("value", "Submit");
+	submit.setAttribute("value", "Add New Task");
 	div1.appendChild(submit);
 
 	//append the form to content
 	form.appendChild(div1);
-	content.appendChild(form);
+	formContainer.appendChild(form);
+	rightContainer.appendChild(formContainer);
 })();
 
 export { form };

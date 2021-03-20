@@ -2,24 +2,24 @@ import * as Project from "./project";
 
 const projectStack = (() => {
 	//declare known HTML elements
-	const content = document.getElementById("content");
+	const leftContainer = document.getElementById("left-container");
 
 	//create new column
 	const projects = document.createElement("div");
 	projects.id = "project-container";
 	//projects.classList.add("row", "twelve", "columns", "projects");
-	projects.classList.add("three", "columns", "projects");
+	projects.classList.add("row", "projects");
 	//projects.innerHTML = "<h1>Projects</h1>";
 
 	//create button to add new
 	const newProject = document.createElement("button");
 	newProject.classList.add("button", "button-primary", "new-project");
-	newProject.appendChild(document.createTextNode("Create New Project!"));
+	newProject.appendChild(document.createTextNode("Add New Project"));
 	newProject.onclick = Project.openForm;
 
 	//append to DOM
 	projects.appendChild(newProject);
-	content.appendChild(projects);
+	leftContainer.appendChild(projects);
 })();
 
 //loop through all projects and add new buttons
@@ -31,7 +31,7 @@ const displayProjects = () => {
 	//create button to add new
 	const newProject = document.createElement("button");
 	newProject.classList.add("button", "button-primary", "new-project");
-	newProject.appendChild(document.createTextNode("Create New Project!"));
+	newProject.appendChild(document.createTextNode("Add New Project"));
 	newProject.onclick = Project.openForm;
 
 	//append to DOM

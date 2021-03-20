@@ -1,6 +1,7 @@
 const feed = (() => {
 	//declare known HTML elements
 	const content = document.getElementById("content");
+	const feed = document.getElementById("form-container");
 
 	//create table
 	const table = document.createElement("table");
@@ -19,7 +20,7 @@ const feed = (() => {
 
 	const col1 = document.createElement("th");
 	col1.innerHTML = "Task Name";
-	col1.classList.add("five", "columns");
+	col1.classList.add("three", "columns");
 
 	// const col2 = document.createElement("th");
 	// col2.innerHTML = "Description";
@@ -27,11 +28,11 @@ const feed = (() => {
 
 	const col3 = document.createElement("th");
 	col3.innerHTML = "Due Date";
-	col3.classList.add("two", "columns");
+	col3.classList.add("three", "columns");
 
 	const col4 = document.createElement("th");
 	col4.innerHTML = "Priority";
-	col4.classList.add("two", "columns");
+	col4.classList.add("three", "columns");
 
 	// const col5 = document.createElement("th");
 	// col5.innerHTML = "";
@@ -62,7 +63,7 @@ const feed = (() => {
 	body.id = "table-body";
 	table.appendChild(body);
 
-	content.appendChild(table);
+	feed.appendChild(table);
 })();
 
 export { feed };
