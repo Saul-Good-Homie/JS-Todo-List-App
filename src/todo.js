@@ -171,14 +171,8 @@ function dummyData() {
 		"09/21/2022",
 		"Medium"
 	);
-
 	//add to project
-
 	Project.addToProject(Project.allProjects[0], newTask);
-	Project.addToProject(Project.allProjects[0], newTask2);
-	Project.displayToDos(Project.allProjects[0]);
-
-	//console.table(Project.allProjects[0]);
 }
 
 export {

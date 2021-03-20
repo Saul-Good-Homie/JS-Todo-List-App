@@ -13,6 +13,7 @@ function restoreLocal() {
 	if (projects === null) {
 		Project.init();
 		ToDo.dummyData();
+		Project.displayToDos(projects[0]);
 		console.log("Initializing All and completed projects");
 		console.log("creating example task");
 	} else {

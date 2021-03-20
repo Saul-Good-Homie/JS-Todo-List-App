@@ -75,7 +75,7 @@ body {
 	background-color: rgb(255, 255, 255);
 	max-width: 100%;
 	word-wrap: break-word;
-	overflow: auto;
+	overflow: hidden;
 }
 
 .active {
