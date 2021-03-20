@@ -4,10 +4,11 @@ const projectStack = (() => {
 	//declare known HTML elements
 	const content = document.getElementById("content");
 
-	//create new row
+	//create new column
 	const projects = document.createElement("div");
 	projects.id = "project-container";
-	projects.classList.add("row", "twelve", "columns", "projects");
+	//projects.classList.add("row", "twelve", "columns", "projects");
+	projects.classList.add("three", "columns", "projects");
 	//projects.innerHTML = "<h1>Projects</h1>";
 
 	//create button to add new

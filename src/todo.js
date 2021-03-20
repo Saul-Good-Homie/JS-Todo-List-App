@@ -94,17 +94,19 @@ function editTask(project, task) {
 		let dueDate = document.getElementById("editTaskDueDate").value;
 		let priority = document.getElementById("editTaskPriority").value;
 
-		let projectName = document.getElementById("editTaskProject").value;
-
-		if (projectName === "no-project-chosen") {
-			console.log("No project chosen");
-		} else {
-			const newProject = Project.allProjects.find(
-				(project) => project.name == projectName
-			);
-			Project.removeFromProject(project, task);
-			Project.addToProject(newProject, task);
+		if (Project.allProjects.length > 2) {
+			let projectName = document.getElementById("editTaskProject").value;
+			if (projectName === "no-project-chosen") {
+				console.log("No project chosen");
+			} else {
+				const newProject = Project.allProjects.find(
+					(project) => project.name == projectName
+				);
+				Project.removeFromProject(project, task);
+				Project.addToProject(newProject, task);
+			}
 		}
+
 		task.name = taskName;
 		task.description = description;
 		task.dueDate = dueDate;
@@ -156,9 +158,9 @@ function init() {
 
 function dummyData() {
 	let newTask = new createToDo(
-		"Dummy Task",
-		"description",
-		"03/24/2021",
+		"Example Task",
+		"This is an example task description",
+		"09/21/2022",
 		"Medium"
 	);
 	let newTask2 = new createToDo(

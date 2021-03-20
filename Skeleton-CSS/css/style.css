@@ -1,7 +1,11 @@
-/* .fas,
-.fa-trash-alt {
-	color: red;
-} */
+.fas {
+	padding: 12px 15px;
+	padding-bottom: 20px;
+	border-collapse: collapse;
+	border-spacing: 0;
+	box-sizing: border-box;
+	font-weight: 700;
+}
 
 .delete-button:hover {
 	cursor: pointer;
@@ -40,7 +44,7 @@
 /* Projects sections */
 
 .projects {
-	border: 1px solid red;
+	/* border: 1px solid red; */
 	margin: 1%;
 }
 

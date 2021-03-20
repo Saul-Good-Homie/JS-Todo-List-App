@@ -57,7 +57,11 @@ const popupForm = (project, task) => {
 	fdate.classList.add("u-full-width");
 	fdate.setAttribute("type", "date");
 	fdate.setAttribute("name", "taskDueDate");
-	fdate.setAttribute("value", task.dueDate);
+	console.log(task.dueDate);
+	let date = task.dueDate;
+
+	let reverseDate = new Date(date).toISOString().substr(0, 10);
+	fdate.setAttribute("value", reverseDate);
 	fdate.id = "editTaskDueDate";
 
 	div4.appendChild(fdateLabel);

@@ -33,25 +33,25 @@ const feed = (() => {
 	col4.innerHTML = "Priority";
 	col4.classList.add("two", "columns");
 
-	const col5 = document.createElement("th");
-	col5.innerHTML = "";
-	col5.classList.add("one", "columns");
+	// const col5 = document.createElement("th");
+	// col5.innerHTML = "";
+	// col5.classList.add("one", "columns");
 
-	const col6 = document.createElement("th");
-	col6.innerHTML = "";
-	col6.classList.add("one", "columns");
+	// const col6 = document.createElement("th");
+	// col6.innerHTML = "";
+	// col6.classList.add("one", "columns");
 
-	const col7 = document.createElement("th");
-	col7.innerHTML = "";
-	col7.classList.add("one", "columns");
+	// const col7 = document.createElement("th");
+	// col7.innerHTML = "";
+	// col7.classList.add("one", "columns");
 
 	headerRow.appendChild(col1);
 	//headerRow.appendChild(col2);
 	headerRow.appendChild(col3);
 	headerRow.appendChild(col4);
-	headerRow.appendChild(col5);
-	headerRow.appendChild(col6);
-	headerRow.appendChild(col7);
+	// headerRow.appendChild(col5);
+	// headerRow.appendChild(col6);
+	// headerRow.appendChild(col7);
 
 	//tableHeader.appendChild(headerRow);
 	table.appendChild(headerRow);
