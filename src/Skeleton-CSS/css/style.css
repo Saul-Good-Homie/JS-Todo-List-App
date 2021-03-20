@@ -85,7 +85,7 @@ body {
 .new-project {
 	max-width: 100%;
 	word-wrap: break-word;
-	overflow: auto;
+	overflow: hidden;
 }
 
 #newProjectForm {
