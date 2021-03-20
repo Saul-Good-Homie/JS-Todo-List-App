@@ -71,13 +71,15 @@ body {
 /* Projects sections */
 
 .projects {
-	/* border: 1px solid red; */
 	margin: 1%;
-	border: 1px solid black;
 	background-color: rgb(255, 255, 255);
 	max-width: 100%;
 	word-wrap: break-word;
 	overflow: auto;
+}
+
+.active {
+	border: 2px solid rgb(87, 87, 87);
 }
 
 .new-project {

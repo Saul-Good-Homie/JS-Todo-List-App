@@ -1,5 +1,6 @@
 import * as edit from "./popup-edit-todo.js";
 import * as Project from "./project";
+import * as Save from "./save-local.js";
 
 //create new ToDo
 function createToDo(name, description, dueDate, priority) {
@@ -38,12 +39,14 @@ const bindUI = () => {
 //add to project
 function addToProject(project, newTask) {
 	project.push(newTask);
+	Save.saveLocal();
 }
 
 // remove from project
 function removeFromProject(deletedTask) {
 	let arr = defaultProject.filter((n) => n !== deletedTask);
 	defaultProject = arr;
+	Save.saveLocal();
 }
 
 function clearFeed() {
@@ -71,11 +74,12 @@ function createTask(e) {
 	let newTask = new createToDo(taskName, description, dueDate, priority);
 	console.log("task created successfully");
 	clearForm();
-	//add t project
+	//add to project
 
 	Project.addToProject(Project.allProjects[0], newTask);
 	console.log(Project.allProjects[0]);
 	Project.displayToDos(Project.allProjects[0]);
+	Save.saveLocal();
 }
 
 function editTask(project, task) {
@@ -113,6 +117,7 @@ function editTask(project, task) {
 		task.priority = priority;
 		//Project.addToProject(newProject, task);
 		Project.displayToDos(project);
+		Save.saveLocal();
 		closeForm();
 	};
 }
@@ -125,6 +130,7 @@ function deleteToDo(e) {
 	let deletedTask = task[0];
 	removeFromProject(deletedTask);
 	displayToDos(Project.allProjects[0]);
+	Save.saveLocal();
 	console.log("task sucessfully deleted");
 }
 
@@ -135,6 +141,7 @@ const markComplete = (project, task) => {
 	Project.addToProject(Project.allProjects[1], task);
 	Project.removeFromProject(project, task);
 	Project.displayToDos(project);
+	Save.saveLocal();
 };
 
 const markUncomplete = (project, task) => {
@@ -144,6 +151,7 @@ const markUncomplete = (project, task) => {
 	Project.addToProject(Project.allProjects[0], task);
 	Project.removeFromProject(project, task);
 	Project.displayToDos(project);
+	Save.saveLocal();
 };
 
 function closeForm() {
@@ -163,12 +171,7 @@ function dummyData() {
 		"09/21/2022",
 		"Medium"
 	);
-	let newTask2 = new createToDo(
-		"Dummy Task two",
-		"description two",
-		"03/24/2021",
-		"High"
-	);
+
 	//add to project
 
 	Project.addToProject(Project.allProjects[0], newTask);

@@ -7,9 +7,7 @@ import { feed } from "./feed";
 
 import * as ToDo from "./todo";
 import * as Project from "./project";
+import * as Save from "./save-local.js";
 
-projectStack.displayProjects();
 ToDo.init();
-Project.init();
-
-ToDo.dummyData();
+Save.restoreLocal();

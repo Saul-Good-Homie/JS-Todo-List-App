@@ -1,5 +1,6 @@
 import * as projectStack from "./projects-stack";
 import * as ToDo from "./todo";
+import * as Save from "./save-local.js";
 
 let allProjects = [];
 
@@ -12,6 +13,7 @@ function addToProject(project, task) {
 	let taskList = project.tasks;
 	taskList.push(task);
 	projectStack.displayProjects();
+	Save.saveLocal();
 }
 
 function removeFromProject(project, task) {
@@ -23,6 +25,7 @@ function removeFromProject(project, task) {
 	//refresh feed
 	projectStack.displayProjects();
 	displayToDos(project);
+	Save.saveLocal();
 }
 
 function displayToDos(project) {
@@ -30,6 +33,7 @@ function displayToDos(project) {
 
 	//declare known HTML elements
 	const table = document.getElementById("table-body");
+
 	ToDo.clearFeed();
 
 	//loop through array and make new rows
@@ -164,6 +168,7 @@ const submitNewProject = () => {
 		let newProject = new createProject(projectName);
 		allProjects.push(newProject);
 		projectStack.displayProjects();
+		Save.saveLocal();
 		closeForm();
 	}
 };
