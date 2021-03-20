@@ -52,41 +52,25 @@ function displayToDos(project) {
 		priority.innerHTML = task.priority;
 		priority.classList.add("three", "columns");
 
-		var deleteButton = document.createElement("td");
-		deleteButton.classList.add(
-			"delete-button",
-			"one",
-			"columns",
-			"fas",
-			"fa-trash-alt"
-		);
+		var controls = document.createElement("td");
+		controls.classList.add("three", "columns", "controls");
+
+		var deleteButton = document.createElement("div");
+		deleteButton.classList.add("delete-button", "fas", "fa-trash-alt");
 		deleteButton.id = task.id;
 		deleteButton.onclick = function () {
 			removeFromProject(project, task);
 		};
 
-		var editButton = document.createElement("td");
-		editButton.classList.add(
-			"edit-button",
-			"one",
-			"columns",
-			"fas",
-			"fa-edit"
-		);
+		var editButton = document.createElement("div");
+		editButton.classList.add("edit-button", "fas", "fa-edit");
 		editButton.id = task.id;
 		editButton.onclick = function () {
 			ToDo.editTask(project, task);
-			//openForm(event);
 		};
 
-		var doneButton = document.createElement("td");
-		doneButton.classList.add(
-			"done-button",
-			"one",
-			"columns",
-			"fas",
-			"fa-check-square"
-		);
+		var doneButton = document.createElement("div");
+		doneButton.classList.add("done-button", "fas", "fa-check-square");
 		if (task.done == false) {
 			doneButton.onclick = function () {
 				ToDo.markComplete(project, task);
@@ -100,14 +84,18 @@ function displayToDos(project) {
 
 		doneButton.id = task.id;
 
+		//add buttons to control column
+		controls.appendChild(deleteButton);
+		controls.appendChild(editButton);
+		controls.appendChild(doneButton);
+
+		//add columns to new row
 		newRow.appendChild(name);
-		//newRow.appendChild(description);
 		newRow.appendChild(dueDate);
 		newRow.appendChild(priority);
-		newRow.appendChild(deleteButton);
-		newRow.appendChild(editButton);
-		newRow.appendChild(doneButton);
-		//append new row to table
+		newRow.appendChild(controls);
+
+		//add new row to table
 		table.appendChild(newRow);
 	});
 }
@@ -117,7 +105,6 @@ const popupForm = () => {
 	const content = document.getElementById("content");
 
 	//create form and append to content
-
 	const form = document.createElement("form");
 	form.id = "newProjectForm";
 

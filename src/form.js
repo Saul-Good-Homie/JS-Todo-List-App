@@ -32,7 +32,7 @@ const form = (() => {
 
 	// Create an input element for todo description
 	const div3 = document.createElement("div");
-	div3.classList.add("five", "columns");
+	div3.classList.add("four", "columns");
 
 	var fdescLabel = document.createElement("label");
 	fdescLabel.setAttribute("for", "taskDescription");
@@ -41,6 +41,7 @@ const form = (() => {
 	fdesc.classList.add("u-full-width");
 	fdesc.setAttribute("type", "text");
 	fdesc.setAttribute("name", "taskDescription");
+	fdesc.setAttribute("height", "60px");
 	fdesc.setAttribute("placeholder", "Enter Task Description");
 	fdesc.id = "taskDescription";
 
@@ -50,7 +51,7 @@ const form = (() => {
 
 	// Create an input element for todo due Date
 	const div4 = document.createElement("div");
-	div4.classList.add("two", "columns");
+	div4.classList.add("three", "columns");
 
 	var fdateLabel = document.createElement("label");
 	fdateLabel.textContent = "Due Date";

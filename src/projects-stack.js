@@ -7,9 +7,7 @@ const projectStack = (() => {
 	//create new column
 	const projects = document.createElement("div");
 	projects.id = "project-container";
-	//projects.classList.add("row", "twelve", "columns", "projects");
-	projects.classList.add("row", "projects");
-	//projects.innerHTML = "<h1>Projects</h1>";
+	projects.classList.add("row");
 
 	//create button to add new
 	const newProject = document.createElement("button");
